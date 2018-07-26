@@ -1,0 +1,78 @@
+<html>
+<style>
+    #paper {
+        /* border: 1px solid gray; */
+        width: 210mm;
+        height: 297mm;
+    }
+    #paper>table{
+        height: 100%;
+        width: 100%;
+        border-collapse: collapse;
+    }
+    .cell {
+        border: 1px solid gray;
+        border-style: dashed;
+        text-align: center;
+        width: 50%
+    }
+    .middle>.left{
+        border-right-style: solid;
+    }
+    .middle>.right{
+        border-left-style: solid;
+    }
+    .left{
+        transform: rotate(90deg);
+    }
+    .right{
+        transform: rotate(270deg);
+    }
+    .number{
+        font-size: 50mm;
+    }
+    .row {
+        width: 100%;
+        height: 25%;
+    }
+</style>
+
+<body>
+    <div id="paper">
+        <table>
+            <tr class="row">
+                <td class="cell left">
+                    <span class="number">0</span>
+                </td>
+                <td class="cell right">
+                    <span class="number">20</span>
+                </td>
+            </tr>
+            <tr class="row middle">
+                <td class="cell left">
+                    <span class="number">1</span>
+                </td>
+                <td class="cell right">
+                    <span class="number">13</span>
+                </td>
+            </tr>
+            <tr class="row middle">
+                <td class="cell left">
+                    <span class="number">2</span>
+                </td>
+                <td class="cell right">
+                    <span class="number">8</span>
+                </td>
+            </tr>
+            <tr class="row">
+                <td class="cell left">
+                    <span class="number">3</span>
+                </td>
+                <td class="cell right">
+                    <span class="number">5</span>
+                </td>
+            </tr>
+        </table>
+    </div>
+</body>
+</html>

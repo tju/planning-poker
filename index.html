@@ -1,3 +1,4 @@
+<!DOCTYPE html>
 <html>
 <style>
     #paper {
@@ -35,8 +36,32 @@
         height: 25%;
     }
     .logo{
-        max-height: 50mm;
+        max-height: 45mm;
         max-width: 70mm;
+    }
+
+    #config{
+        right:30px;
+        top: 30px;
+
+        width: 300px;
+        position: fixed;
+        background: white;
+        z-index: 100;
+        border: 1p solid gray;
+        padding: 30px;
+        box-shadow: 0 14px 28px rgba(0,0,0,0.25), 0 10px 10px rgba(0,0,0,0.22);
+    }
+    #config>.form-group{
+        padding: 15px;
+    }
+    #config>.form-group>label{
+        padding-bottom: 5px;
+    }
+    @media print {
+        #config{
+            display: none;
+        }
     }
 </style>
 
@@ -85,5 +110,55 @@
             </tr>
         </table>
     </div>
+    <div id="config">
+        <div class="form-group">
+            <label for="paper_format">Paper format</label>
+            <br/>
+            <select id="paper_format" name="paper_format">
+                <option value="a4">A4</option>
+                <option value="letter">Letter</option>
+              </select> 
+        </div>
+        <div class="form-group">
+            <label for="logo_url">Custom logo url</label>
+            <br/>
+            <input type="url" name="logo_url" />
+        </div>
+        <div class="form-group">
+            <button id="print" onclick="window.print()">Print</button>
+        </div>
+    </div>
 </body>
+
+
+<script type="application/javascript">
+
+    document.addEventListener('DOMContentLoaded',function() {
+        document.querySelector('select[name="paper_format"]').onchange=paperFormatChangeEventHandler;
+        document.querySelector('input[name="logo_url"]').onchange=logoUrlChangeEventHandler;
+    },false);
+    
+    function paperFormatChangeEventHandler(event) {
+        if(!event.target.value) return;
+        let paperDiv= document.querySelector('#paper');
+        switch(event.target.value){
+            case "letter":
+                paperDiv.style.width="8.5in";
+                paperDiv.style.height="11in";
+                break;
+            case "a4":
+            default:
+                paperDiv.style.width="210mm";
+                paperDiv.style.height="297mm";
+        }
+    }
+
+    function logoUrlChangeEventHandler(event) {
+        if(!event.target.value) return;
+        
+        document.querySelectorAll('.logo').forEach(function(element){
+            element.setAttribute("src", event.target.value);
+        });
+    }
+</script>
 </html>

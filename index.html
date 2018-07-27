@@ -1,47 +1,64 @@
 <!DOCTYPE html>
 <html>
 <style>
+    html {
+        height: auto;
+        margin: 0;
+    }
+
+    body {
+        width: 297mm;
+        margin: 0;
+        height: auto;
+        display: block;
+    }
+
     #paper {
-        width: 210mm;
-        height: 297mm;
-    }
-    #paper>table{
-        height: 100%;
-        width: 100%;
+        width: 297mm;
+        height: 210mm;
+        box-sizing: border-box;
         border-collapse: collapse;
+        padding: 0;
+        margin: 0;
     }
+
+    .row {
+        width: 100%;
+        height: 50%;
+    }
+
     .cell {
         border: 1px solid gray;
         border-style: dashed;
         text-align: center;
-        width: 50%
-    }
-    .middle>.left{
-        border-right-style: solid;
-    }
-    .middle>.right{
-        border-left-style: solid;
-    }
-    .left{
-        transform: rotate(90deg);
-    }
-    .right{
-        transform: rotate(270deg);
-    }
-    .number{
-        font-size: 50mm;
-    }
-    .row {
-        width: 100%;
-        height: 25%;
-    }
-    .logo{
-        max-height: 45mm;
-        max-width: 70mm;
+        width: 25%;
+        position: relative;
     }
 
-    #config{
-        right:30px;
+    .top>.middle {
+        border-bottom-style: solid;
+    }
+
+    .bottom>.middle {
+        border-top-style: solid;
+    }
+
+    .bottom {
+        transform: rotate(180deg);
+    }
+
+    .number {
+        font-size: 50mm;
+        margin-bottom: 5mm;
+    }
+
+    .logo {
+        max-height: 30mm;
+        max-width: 40mm;
+    }
+
+    #config {
+        right: 30px;
         top: 30px;
 
         width: 300px;
@@ -50,66 +67,63 @@
         z-index: 100;
         border: 1p solid gray;
         padding: 30px;
-        box-shadow: 0 14px 28px rgba(0,0,0,0.25), 0 10px 10px rgba(0,0,0,0.22);
+        box-shadow: 0 14px 28px rgba(0, 0, 0, 0.25), 0 10px 10px rgba(0, 0, 0, 0.22);
     }
-    #config>.form-group{
+
+    #config>.form-group {
         padding: 15px;
     }
-    #config>.form-group>label{
+
+    #config>.form-group>label {
         padding-bottom: 5px;
     }
+
     @media print {
-        #config{
+        #config {
             display: none;
         }
     }
 </style>
 
 <body>
-    <div id="paper">
-        <table>
-            <tr class="row">
-                <td class="cell left">
-                    <div class="number">0</div>
-                    <img class="logo" src="https://www.google.com/images/branding/googlelogo/1x/googlelogo_color_272x92dp.png"></img>
-                </td>
-                <td class="cell right">
-                    <div class="number">20</div>
-                    <img class="logo" src="https://www.google.com/images/branding/googlelogo/1x/googlelogo_color_272x92dp.png"></img>
-                </td>
-            </tr>
-            <tr class="row middle">
-                <td class="cell left">
-                    <div class="number">1</div>
-                    <img class="logo" src="https://www.google.com/images/branding/googlelogo/1x/googlelogo_color_272x92dp.png"></img>
-                </td>
-                <td class="cell right">
-                    <div class="number">13</div>
-                    <img class="logo" src="https://www.google.com/images/branding/googlelogo/1x/googlelogo_color_272x92dp.png"></img>
-                </td>
-            </tr>
-            <tr class="row middle">
-                <td class="cell left">
-                    <div class="number">2</div>
-                    <img class="logo" src="https://www.google.com/images/branding/googlelogo/1x/googlelogo_color_272x92dp.png"></img>
-                </td>
-                <td class="cell right">
-                    <div class="number">8</div>
-                    <img class="logo" src="https://www.google.com/images/branding/googlelogo/1x/googlelogo_color_272x92dp.png"></img>
-                </td>
-            </tr>
-            <tr class="row">
-                <td class="cell left">
-                    <div class="number">3</div>
-                    <img class="logo" src="https://www.google.com/images/branding/googlelogo/1x/googlelogo_color_272x92dp.png"></img>
-                </td>
-                <td class="cell right">
-                    <div class="number">5</div>
-                    <img class="logo" src="https://www.google.com/images/branding/googlelogo/1x/googlelogo_color_272x92dp.png"></img>
-                </td>
-            </tr>
-        </table>
-    </div>
+    <table id="paper">
+        <tr class="row top">
+            <td class="cell">
+                <div class="number">0</div>
+                <img class="logo" src="https://www.google.com/images/branding/googlelogo/1x/googlelogo_color_272x92dp.png"></img>
+            </td>
+            <td class="cell middle">
+                <div class="number">1</div>
+                <img class="logo" src="https://www.google.com/images/branding/googlelogo/1x/googlelogo_color_272x92dp.png"></img>
+            </td>
+            <td class="cell middle">
+                <div class="number">2</div>
+                <img class="logo" src="https://www.google.com/images/branding/googlelogo/1x/googlelogo_color_272x92dp.png"></img>
+            </td>
+            <td class="cell">
+                <div class="number">3</div>
+                <img class="logo" src="https://www.google.com/images/branding/googlelogo/1x/googlelogo_color_272x92dp.png"></img>
+            </td>
+        </tr>
+        <tr class="row bottom">
+            <td class="cell">
+                <div class="number">5</div>
+                <img class="logo" src="https://www.google.com/images/branding/googlelogo/1x/googlelogo_color_272x92dp.png"></img>
+            </td>
+            <td class="cell middle">
+                <div class="number">8</div>
+                <img class="logo" src="https://www.google.com/images/branding/googlelogo/1x/googlelogo_color_272x92dp.png"></img>
+            </td>
+            <td class="cell middle">
+                <div class="number">13</div>
+                <img class="logo" src="https://www.google.com/images/branding/googlelogo/1x/googlelogo_color_272x92dp.png"></img>
+            </td>
+            <td class="cell">
+                <div class="number">20</div>
+                <img class="logo" src="https://www.google.com/images/branding/googlelogo/1x/googlelogo_color_272x92dp.png"></img>
+            </td>
+        </tr>
+    </table>
     <div id="config">
         <div class="form-group">
             <label for="paper_format">Paper format</label>
@@ -117,7 +131,7 @@
             <select id="paper_format" name="paper_format">
                 <option value="a4">A4</option>
                 <option value="letter">Letter</option>
-              </select> 
+            </select>
         </div>
         <div class="form-group">
             <label for="logo_url">Custom logo url</label>
@@ -133,32 +147,33 @@
 
 <script type="application/javascript">
 
-    document.addEventListener('DOMContentLoaded',function() {
-        document.querySelector('select[name="paper_format"]').onchange=paperFormatChangeEventHandler;
-        document.querySelector('input[name="logo_url"]').onchange=logoUrlChangeEventHandler;
-    },false);
-    
+    document.addEventListener('DOMContentLoaded', function () {
+        document.querySelector('select[name="paper_format"]').onchange = paperFormatChangeEventHandler;
+        document.querySelector('input[name="logo_url"]').onchange = logoUrlChangeEventHandler;
+    }, false);
+
     function paperFormatChangeEventHandler(event) {
-        if(!event.target.value) return;
-        let paperDiv= document.querySelector('#paper');
-        switch(event.target.value){
+        if (!event.target.value) return;
+        switch (event.target.value) {
             case "letter":
-                paperDiv.style.width="8.5in";
-                paperDiv.style.height="11in";
+                paper.style.height = "8.5in";
+                paper.style.width = "11in";
+                document.body.style.width = "11in";
                 break;
             case "a4":
             default:
-                paperDiv.style.width="210mm";
-                paperDiv.style.height="297mm";
+                paper.style.height = "210mm";
+                paper.style.width = "297mm";
+                document.body.style.width = "297mm";
         }
     }
 
     function logoUrlChangeEventHandler(event) {
-        if(!event.target.value) return;
-        
-        document.querySelectorAll('.logo').forEach(function(element){
+        if (!event.target.value) return;
+        document.querySelectorAll('.logo').forEach(function (element) {
             element.setAttribute("src", event.target.value);
         });
     }
 </script>
+
 </html>

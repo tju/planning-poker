@@ -1,0 +1,194 @@
+<!DOCTYPE html>
+<html>
+<style>
+    html {
+        height: auto;
+        margin: 0;
+    }
+
+    body {
+        width: 297mm;
+        margin: 0;
+        height: auto;
+        display: block;
+    }
+
+    #paper {
+        width: 297mm;
+        height: 210mm;
+        box-sizing: border-box;
+        border-collapse: collapse;
+        padding: 0;
+        margin: 0;
+    }
+
+    .row {
+        width: 100%;
+        height: 50%;
+    }
+
+    .cell {
+        border: 1px solid gray;
+        border-style: dashed;
+        text-align: center;
+        width: 25%;
+        position: relative;
+    }
+
+    .top>.middle {
+        border-bottom-style: solid;
+    }
+
+    .bottom>.middle {
+        border-top-style: solid;
+    }
+
+    .bottom {
+        transform: rotate(180deg);
+    }
+
+    .number {
+        font-size: 50mm;
+        margin-bottom: 5mm;
+    }
+
+    .logo {
+        max-height: 30mm;
+        max-width: 40mm;
+    }
+
+    #config {
+        right: 30px;
+        top: 30px;
+
+        width: 300px;
+        position: fixed;
+        background: white;
+        z-index: 100;
+        border: 1p solid gray;
+        padding: 30px;
+        box-shadow: 0 14px 28px rgba(0, 0, 0, 0.25), 0 10px 10px rgba(0, 0, 0, 0.22);
+    }
+
+    #config>.form-group {
+        padding: 15px;
+    }
+
+    #config>.form-group>label {
+        padding-bottom: 5px;
+    }
+
+    #logo_url_error{
+        font-size: 80%;
+        color:#a33;
+    }
+
+    @media print {
+        #config {
+            display: none;
+        }
+    }
+</style>
+
+<body>
+    <table id="paper">
+        <tr class="row top">
+            <td class="cell">
+                <div class="number">0</div>
+                <img class="logo" onerror="window.onloadImageError()" ></img>
+            </td>
+            <td class="cell middle">
+                <div class="number">1</div>
+                <img class="logo"></img>
+            </td>
+            <td class="cell middle">
+                <div class="number">2</div>
+                <img class="logo"></img>
+            </td>
+            <td class="cell">
+                <div class="number">3</div>
+                <img class="logo"></img>
+            </td>
+        </tr>
+        <tr class="row bottom">
+            <td class="cell">
+                <div class="number">5</div>
+                <img class="logo"></img>
+            </td>
+            <td class="cell middle">
+                <div class="number">8</div>
+                <img class="logo"></img>
+            </td>
+            <td class="cell middle">
+                <div class="number">13</div>
+                <img class="logo"></img>
+            </td>
+            <td class="cell">
+                <div class="number">20</div>
+                <img class="logo"></img>
+            </td>
+        </tr>
+    </table>
+    <div id="config">
+        <div class="form-group">
+            <label for="paper_format">Paper format</label>
+            <br/>
+            <select id="paper_format" name="paper_format">
+                <option value="a4">A4</option>
+                <option value="letter">Letter</option>
+            </select>
+        </div>
+        <div class="form-group">
+            <label for="logo_url">Custom logo URL</label>
+            <br/>
+            <input type="url" name="logo_url" id="logo_url"/>
+            <button id="load_image" onclick="window.loadLogoImage()">Load logo</button>
+            <span id="logo_url_error" style="display: none">Error loading logo.</span>
+        </div>
+        <div class="form-group">
+            <button id="print" onclick="window.print()">Print</button>
+        </div>
+    </div>
+</body>
+
+
+<script type="application/javascript">
+
+    document.addEventListener("DOMContentLoaded", function () {
+        document.querySelector("select[name='paper_format']").onchange = paperFormatChangeEventHandler;
+    }, false);
+
+    function paperFormatChangeEventHandler(event) {
+        if (!event.target.value) return;
+        switch (event.target.value) {
+            case "letter":
+                paper.style.height = "8.5in";
+                paper.style.width = "11in";
+                document.body.style.width = "11in";
+                break;
+            case "a4":
+            default:
+                paper.style.height = "210mm";
+                paper.style.width = "297mm";
+                document.body.style.width = "297mm";
+        }
+    }
+
+    function loadLogoImage(){
+        document.querySelectorAll(".logo").forEach(function (element) {
+            element.setAttribute("src", logo_url.value);
+            element.style.display = "inline-block";
+        });
+        logo_url_error.style.display = "none";
+    }
+
+    function onloadImageError(){
+        document.querySelectorAll(".logo").forEach(function (element) {
+            element.style.display = "none";
+        });
+        logo_url_error.style.display = "inline";
+    }
+
+</script>
+
+</html>

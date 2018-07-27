@@ -78,6 +78,11 @@
         padding-bottom: 5px;
     }
 
+    #logo_url_error{
+        font-size: 80%;
+        color:#a33;
+    }
+
     @media print {
         #config {
             display: none;
@@ -90,37 +95,37 @@
         <tr class="row top">
             <td class="cell">
                 <div class="number">0</div>
-                <img class="logo" src="https://www.google.com/images/branding/googlelogo/1x/googlelogo_color_272x92dp.png"></img>
+                <img class="logo" onerror="window.onloadImageError()" ></img>
             </td>
             <td class="cell middle">
                 <div class="number">1</div>
-                <img class="logo" src="https://www.google.com/images/branding/googlelogo/1x/googlelogo_color_272x92dp.png"></img>
+                <img class="logo"></img>
             </td>
             <td class="cell middle">
                 <div class="number">2</div>
-                <img class="logo" src="https://www.google.com/images/branding/googlelogo/1x/googlelogo_color_272x92dp.png"></img>
+                <img class="logo"></img>
             </td>
             <td class="cell">
                 <div class="number">3</div>
-                <img class="logo" src="https://www.google.com/images/branding/googlelogo/1x/googlelogo_color_272x92dp.png"></img>
+                <img class="logo"></img>
             </td>
         </tr>
         <tr class="row bottom">
             <td class="cell">
                 <div class="number">5</div>
-                <img class="logo" src="https://www.google.com/images/branding/googlelogo/1x/googlelogo_color_272x92dp.png"></img>
+                <img class="logo"></img>
             </td>
             <td class="cell middle">
                 <div class="number">8</div>
-                <img class="logo" src="https://www.google.com/images/branding/googlelogo/1x/googlelogo_color_272x92dp.png"></img>
+                <img class="logo"></img>
             </td>
             <td class="cell middle">
                 <div class="number">13</div>
-                <img class="logo" src="https://www.google.com/images/branding/googlelogo/1x/googlelogo_color_272x92dp.png"></img>
+                <img class="logo"></img>
             </td>
             <td class="cell">
                 <div class="number">20</div>
-                <img class="logo" src="https://www.google.com/images/branding/googlelogo/1x/googlelogo_color_272x92dp.png"></img>
+                <img class="logo"></img>
             </td>
         </tr>
     </table>
@@ -134,9 +139,11 @@
             </select>
         </div>
         <div class="form-group">
-            <label for="logo_url">Custom logo url</label>
+            <label for="logo_url">Custom logo URL</label>
             <br/>
-            <input type="url" name="logo_url" />
+            <input type="url" name="logo_url" id="logo_url"/>
+            <button id="load_image" onclick="window.loadLogoImage()">Load logo</button>
+            <span id="logo_url_error" style="display: none">Error loading logo.</span>
         </div>
         <div class="form-group">
             <button id="print" onclick="window.print()">Print</button>
@@ -147,9 +154,8 @@
 
 <script type="application/javascript">
 
-    document.addEventListener('DOMContentLoaded', function () {
-        document.querySelector('select[name="paper_format"]').onchange = paperFormatChangeEventHandler;
-        document.querySelector('input[name="logo_url"]').onchange = logoUrlChangeEventHandler;
+    document.addEventListener("DOMContentLoaded", function () {
+        document.querySelector("select[name='paper_format']").onchange = paperFormatChangeEventHandler;
     }, false);
 
     function paperFormatChangeEventHandler(event) {
@@ -168,12 +174,21 @@
         }
     }
 
-    function logoUrlChangeEventHandler(event) {
-        if (!event.target.value) return;
-        document.querySelectorAll('.logo').forEach(function (element) {
-            element.setAttribute("src", event.target.value);
+    function loadLogoImage(){
+        document.querySelectorAll(".logo").forEach(function (element) {
+            element.setAttribute("src", logo_url.value);
+            element.style.display = "inline-block";
         });
+        logo_url_error.style.display = "none";
     }
+
+    function onloadImageError(){
+        document.querySelectorAll(".logo").forEach(function (element) {
+            element.style.display = "none";
+        });
+        logo_url_error.style.display = "inline";
+    }
+
 </script>
 
 </html>
